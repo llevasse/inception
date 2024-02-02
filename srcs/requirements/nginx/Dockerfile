@@ -1,4 +1,4 @@
-# syntax=doker/dockerfile:1
 FROM scratch
-COPY hello /
-CMD ["/hello"]
+
+RUN apt-get update -y && apt-get upgrade -y
+RUN apt-get install -y dumb-init nginx openssl
