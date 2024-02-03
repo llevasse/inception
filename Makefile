@@ -10,26 +10,26 @@ NGINX			=	$(addprefix $(REQ),nginx/)
 MARIADB			=	$(addprefix $(REQ),mariadb/)
 WORDPRESS		=	$(addprefix $(REQ),wordpress/)
 
-COMPOSE			= docker compose -f $(SRCS)docker-compose.yml -p $(NAME)
+COMPOSE			:= docker-compose -f $(SRCS)docker-compose.yml -p $(NAME)
 RM				=	rm -rf
 MKDIR			= mkdir -p
 
 #---RULES----------------------
-all: build
+all: up
 
-build:
+up:
 	$(MAKE) volumes
-	$(COMPOSE) build 
+	$(COMPOSE) up -d --build
 
 volumes:
 	$(MKDIR) /home/leo/data/wordpress
 	$(MKDIR) /home/leo/data/mariadb
 
-destroy:
-	$(COMPOSE) destroy --rmi all -v --remove-orphans
+down:
+	$(COMPOSE) down --rmi all -v --remove-orphans
 
 clean:
-	$(MAKE) destroy
+	$(MAKE) down
 
 fclean:
 	$(MAKE) clean
