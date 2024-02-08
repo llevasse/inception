@@ -1,1 +1,6 @@
-srcs/.env
+*
+!.gitignore
+!*.conf
+!*/Dockerfile
+!*/
+!Makefile
