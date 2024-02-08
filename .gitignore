@@ -1,6 +1,7 @@
 *
 !.gitignore
 !*.conf
+!*.cnf
 !Dockerfile
 !*/
 !Makefile
