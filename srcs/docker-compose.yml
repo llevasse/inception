@@ -2,13 +2,13 @@ version: '3.8'
 
 services:
   mariadb:
+    env_file: .env
     container_name: mariadb
     nertworks:
-      inception
+      - inception
     build:
       context: requirements/mariadb
       dockerfile: Dockerfile
-      end_file: .env
       args:
         - SQL_DATABASE
         - SQL_ROOT_PW
@@ -18,4 +18,46 @@ services:
         mariadb:/var/lib/mysql
       restart: always
       expose:
-        3306:3306
+        - "3306"
+  wordpress:
+    container_name: wordpress
+    env_file: .env
+    volumes:
+      - wordpress:/var/www/wordpress
+    networks:
+      - inception
+    build:
+      context: requirement/wordpress
+      args:
+        - SQL_DATABASE
+        - SQL_ROOT
+        - SQL_ROOT_PW
+        - SQL_ROOT_MAIL
+        - SQL_USER
+        - SQL_USER_PW
+        - SQL_USER_MAIL
+        - DOMAIN_NAME
+        - WP_TITLE
+
+      dockerfile: Dockerfile
+      depends_on:
+        -mariadb
+      restart: always
+      expose:
+        - "9000"
+  nginx:
+    container_name: nginx
+    env_file: .env
+    volumes:
+      - wordpress:/var/www/wordpress
+    networks:
+      - inception
+    build:
+      context: requirement/nginx
+      dockerfile: Dockerfile
+      depends_on:
+        - wordpress
+      restart: always
+      ports:
+        - "443:443"
+  
