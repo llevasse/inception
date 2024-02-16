@@ -1,1 +1,16 @@
 version: '3'
+
+services:
+  mariadb:
+    container_name: mariadb
+    nertworks:
+      inception
+    build:
+      context: requirements/mariadb
+      dockerfile: Dockerfile
+      end_file: .env
+      volumes:
+        mariadb:/var/lib/mysql
+      restert: always
+      expose:
+        3306
