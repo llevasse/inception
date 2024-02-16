@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
   mariadb:
@@ -9,8 +9,13 @@ services:
       context: requirements/mariadb
       dockerfile: Dockerfile
       end_file: .env
+      args:
+        - SQL_DATABASE
+        - SQL_ROOT_PW
+        - SQL_USER
+        - SQL_USER_PW
       volumes:
         mariadb:/var/lib/mysql
-      restert: always
+      restart: always
       expose:
-        3306
+        3306:3306
