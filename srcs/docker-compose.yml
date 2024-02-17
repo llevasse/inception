@@ -4,21 +4,21 @@ services:
   mariadb:
     env_file: .env
     container_name: mariadb
-    nertworks:
+    networks:
       - inception
+    volumes:
+      - mariadb:/var/lib/mysql
     build:
-      context: requirements/mariadb
+      context: requirement/mariadb
       dockerfile: Dockerfile
       args:
         - SQL_DATABASE
         - SQL_ROOT_PW
         - SQL_USER
         - SQL_USER_PW
-      volumes:
-        mariadb:/var/lib/mysql
-      restart: always
-      expose:
-        - "3306"
+    restart: always
+    expose:
+      - "3306"
   wordpress:
     container_name: wordpress
     env_file: .env
@@ -26,6 +26,8 @@ services:
       - wordpress:/var/www/wordpress
     networks:
       - inception
+    depends_on:
+      - mariadb
     build:
       context: requirement/wordpress
       args:
@@ -40,11 +42,9 @@ services:
         - WP_TITLE
 
       dockerfile: Dockerfile
-      depends_on:
-        -mariadb
-      restart: always
-      expose:
-        - "9000"
+    restart: always
+    expose:
+      - "9000"
   nginx:
     container_name: nginx
     env_file: .env
@@ -52,12 +52,29 @@ services:
       - wordpress:/var/www/wordpress
     networks:
       - inception
+    depends_on:
+      - wordpress
+    ports:
+      - "443:443"
     build:
       context: requirement/nginx
       dockerfile: Dockerfile
-      depends_on:
-        - wordpress
-      restart: always
-      ports:
-        - "443:443"
+    restart: always
   
+volumes:
+  mariadb:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/Users/llevasse/data/mariadb'
+  wordpress:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/Users/llevasse/data/wordpress'
+
+networks:
+  inception:
+    driver: bridge
