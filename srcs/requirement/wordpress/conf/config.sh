@@ -6,4 +6,5 @@ wp core install	--path="/var/www/html/wordpress" --allow-root --url=$DOMAIN_NAME
 wp user create --path="/var/www/html/wordpress" --allow-root $SQL_USER $SQL_USER_MAIL --user_pass=$SQL_USER_PW
 
 mkdir -p /run/php
+php-fpm7.3 -F
 php-fpm8.2 -F

@@ -56,6 +56,8 @@ services:
       - wordpress
     ports:
       - "443:443"
+    expose:
+      - "443"
     build:
       context: requirement/nginx
       dockerfile: Dockerfile

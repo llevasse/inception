@@ -3,6 +3,8 @@ FROM debian:buster
 RUN apt update -y && apt upgrade -y
 RUN	apt install nginx openssl -y
 
+EXPOSE	443
+
 RUN mkdir -p /etc/nginx/ssl
 RUN mkdir -p /var/run/nginx
 COPY /conf/nginx.conf /etc/nginx/sites-available/llevasse.42.fr.conf
@@ -14,9 +16,8 @@ RUN openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/ngin
 
 
 RUN chmod 755 /var/www/html
-RUN cp /usr/share/nginx/html/index.html var/www/
-RUN chown -R www-data:www-data /var/www/
+RUN chown -R www-data:www-data /var/www/html
+RUN chown -R root:root /var/www/html
 
-EXPOSE	443
 
 CMD ["nginx", "-g", "daemon off;"]
