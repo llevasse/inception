@@ -10,7 +10,7 @@ ARG SQL_PW
 
 EXPOSE 3306
 COPY conf/server.cnf /etc/mysql/mariadb.conf.d/server.cnf
-COPY conf/create_db.sh /create_db.sh
-RUN chmod +x /create_db.sh
+COPY conf/create.sh /create.sh
+RUN chmod +x /create.sh
 
-ENTRYPOINT [ "bash", "/create_db.sh" ]
+ENTRYPOINT [ "bash", "/create.sh" ]
