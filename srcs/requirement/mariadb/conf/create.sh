@@ -7,7 +7,7 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PW}'; \
 FLUSH PRIVILEGES;"
 printf "Lunch mysqladmin command\n"
 chmod 755 -R /var/run/mysqld
-chown root:root /var/run/mysqld	#/var/run/mysqld.sock is deleted without this line ¯\_(ツ)_/¯
+chown root:root -R /var/run/mysqld	#/var/run/mysqld.sock is deleted without this line ¯\_(ツ)_/¯
 mysqladmin -u root -p${SQL_ROOT_PW} shutdown
 echo 'ls' `ls -R /var/run/mysqld`
 #printf "Lunch mysqld_safe\n"
