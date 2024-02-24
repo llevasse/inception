@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 
 RUN apt-get update -y && apt-get upgrade -y
 RUN apt-get install wget php php-fpm php-mysql mariadb-client -y
