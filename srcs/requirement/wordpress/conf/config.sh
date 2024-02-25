@@ -12,5 +12,4 @@ if [ ! -f "/var/www/wordpress/wp-config.php" ]; then
 fi
 
 mkdir -p /run/php
-php-fpm7.3 -F
-php-fpm8.2 -F
+php-fpm7.4 -F
