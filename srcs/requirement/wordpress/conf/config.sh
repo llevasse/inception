@@ -1,6 +1,7 @@
-printf "Lunch config.sh\n"
+printf "Lunch config.sh (sleep 1)\n"
 
-sleep 10
+sleep 1
+printf "Lunch config.sh\n"
 if [ ! -f "/var/www/wordpress/wp-config.php" ]; then
 	printf "No wp-config.php found\n"
 	wp config create --allow-root --dbname=$SQL_DATABASE --dbuser=$SQL_USER --dbpass=$SQL_ROOT_PW --dbhost=mariadb:3306 --path='/var/www/wordpress'
@@ -12,4 +13,7 @@ if [ ! -f "/var/www/wordpress/wp-config.php" ]; then
 fi
 
 mkdir -p /run/php
+printf "php-fpm7.4\n"
 php-fpm7.4 -F
+
+printf "End config.sh\n"
