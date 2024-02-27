@@ -13,7 +13,6 @@ COPY conf/server.cnf /etc/mysql/mariadb.conf.d/server.cnf
 RUN service mariadb start && mariadb -u root -p${SQL_ROOT_PW} -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`; \
 CREATE USER IF NOT EXISTS \`${SQL_USER}\`@'localhost' IDENTIFIED BY '${SQL_USER_PW}'; \
 GRANT ALL PRIVILEGES ON \`${SQL_DATABASE}\`.* TO \`${SQL_USER}\`@'%' IDENTIFIED BY '${SQL_USER_PW}'; \
-ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PW}'; \
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'pw'; \
 FLUSH PRIVILEGES;"
 CMD [ "mysqld", "--bind-address=0.0.0.0" ]
-RUN echo "cc :)"
