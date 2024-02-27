@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:oldstable-slim
 
 RUN apt update -y && apt upgrade -y
 RUN	apt install nginx openssl -y
