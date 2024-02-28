@@ -17,7 +17,7 @@ services:
         - SQL_USER
         - SQL_USER_PW
           #    restart: always
-    expose:
+    ports:
       - "3306"
   wordpress:
     container_name: wordpress
