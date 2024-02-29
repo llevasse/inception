@@ -1,4 +1,4 @@
-FROM debian:oldstable-slim
+FROM debian:buster-slim
 
 RUN apt update -y && apt upgrade -y
 RUN	apt install nginx openssl -y

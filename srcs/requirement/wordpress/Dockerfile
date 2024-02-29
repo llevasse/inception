@@ -1,7 +1,10 @@
-FROM debian:oldstable-slim
+FROM debian:buster-slim
 
 RUN apt-get update -y && apt-get upgrade -y
 RUN apt-get install wget php php-fpm php-mysql mariadb-client -y
+
+EXPOSE 9000
+EXPOSE 3306
 
 RUN wget https://fr.wordpress.org/wordpress-6.4.3-fr_FR.tar.gz -P /var/www/
 
@@ -14,7 +17,6 @@ RUN chmod -R 755 /var/www/wordpress
 
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
-RUN php wp-cli.phar --info
 RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
 
@@ -24,5 +26,3 @@ RUN chmod +x /tmp/config.sh
 RUN mkdir -p /var/run/php
 
 ENTRYPOINT ["bash", "/tmp/config.sh"]
-
-EXPOSE 9000
