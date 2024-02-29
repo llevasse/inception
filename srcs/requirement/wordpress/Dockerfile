@@ -25,4 +25,4 @@ RUN chmod +x /tmp/config.sh
 
 RUN mkdir -p /var/run/php
 
-ENTRYPOINT ["bash", "/tmp/config.sh"]
+ENTRYPOINT ["sh", "/tmp/config.sh"]
