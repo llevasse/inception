@@ -16,7 +16,7 @@ services:
         - SQL_ROOT_PW
         - SQL_USER
         - SQL_USER_PW
-    restart: always
+    #restart: always
     ports:
       - 3306
   wordpress:
@@ -42,7 +42,7 @@ services:
         - WP_TITLE
 
       dockerfile: Dockerfile
-    restart: always
+    #restart: always
     expose:
       - "9000"
   nginx:
@@ -61,7 +61,7 @@ services:
     build:
       context: requirement/nginx
       dockerfile: Dockerfile
-    restart: always
+      #restart: always
   
 volumes:
   db_volume:

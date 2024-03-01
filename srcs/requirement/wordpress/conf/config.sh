@@ -21,5 +21,3 @@ mkdir -p /run/php
 while 1
 printf "php-fpm7.4\n"
 php-fpm7.4 -F
-
-printf "End config.sh\n"

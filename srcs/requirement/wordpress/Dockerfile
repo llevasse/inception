@@ -3,8 +3,7 @@ FROM debian:buster-slim
 RUN apt-get update -y && apt-get upgrade -y
 RUN apt-get install wget php php-fpm php-mysql mariadb-client -y
 
-EXPOSE 9000
-EXPOSE 3306
+EXPOSE 9000 3306
 
 RUN wget https://fr.wordpress.org/wordpress-6.4.3-fr_FR.tar.gz -P /var/www/
 
