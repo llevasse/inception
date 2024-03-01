@@ -1,6 +1,6 @@
 printf "Lunch config.sh (sleep 1)\n"
 
-sleep 1
+sleep 5
 printf "Lunch config.sh\n"
 	wp core download --path=/var/www/wordpress --allow-root
 	printf "No wp-config.php found\n"
