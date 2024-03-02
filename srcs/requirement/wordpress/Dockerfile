@@ -1,22 +1,18 @@
 FROM debian:bullseye-slim
 
 RUN apt-get update -y && apt-get upgrade -y
-RUN apt-get install wget php php-fpm php-mysql mariadb-client -y
+RUN apt-get install curl php php-fpm php-mysql mariadb-client -y
 
 EXPOSE 9000 3306
 
-RUN wget https://wordpress.org/wordpress-6.4.3.tar.gz -P /var/www/
-RUN cd /var/www && tar -xzf wordpress-6.4.3.tar.gz && rm wordpress-6.4.3.tar.gz
 
 COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
-RUN chown -R www-data:www-data /var/www/wordpress
-RUN chmod -R 755 /var/www/wordpress
+ADD https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar /usr/local/bin/wp
 
-RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN chmod +x /usr/local/bin/wp
 
-RUN chmod +x wp-cli.phar
-RUN mv wp-cli.phar /usr/local/bin/wp
+RUN mkdir -p /var/www/html/wordpress
 
 COPY conf/config.sh /tmp/config.sh
 RUN chmod +x /tmp/config.sh
