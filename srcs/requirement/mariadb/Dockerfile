@@ -1,4 +1,4 @@
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 
 RUN apt-get update -y && apt-get upgrade -y
 RUN	apt-get install -y mariadb-server
@@ -10,8 +10,8 @@ ARG SQL_USER_PW
 
 COPY conf/server.cnf /etc/mysql/mariadb.conf.d/server.cnf
 
-RUN service mysql start && \
-mysql -e "CREATE DATABASE IF NOT EXISTS inception; \
+RUN service mariadb start && \
+mariadb -e "CREATE DATABASE IF NOT EXISTS inception; \
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'pw';\
 GRANT ALL PRIVILEGES ON inception.* TO 'elise'@'%' IDENTIFIED BY 'pw'; \
 FLUSH PRIVILEGES;"
