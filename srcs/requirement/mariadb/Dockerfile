@@ -10,16 +10,10 @@ ARG SQL_USER_PW
 
 COPY conf/server.cnf /etc/mysql/mariadb.conf.d/server.cnf
 
-RUN service mariadb start && \
-mariadb -e "CREATE DATABASE IF NOT EXISTS inception; \
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'pw';\
-GRANT ALL PRIVILEGES ON inception.* TO 'elise'@'%' IDENTIFIED BY 'pw'; \
+RUN service mariadb start && mariadb -e "CREATE DATABASE IF NOT EXISTS ${SQL_DATABASE}; \
+ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PW}';\
+GRANT ALL PRIVILEGES ON ${SQL_DATABASE}.* TO '${SQL_USER}'@'%' IDENTIFIED BY '${SQL_ROOT_PW}'; \
 FLUSH PRIVILEGES;"
-#
-#mysql -e "CREATE DATABASE IF NOT EXISTS ${SQL_DATABASE}; \
-#ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PW}';\
-#GRANT ALL PRIVILEGES ON ${SQL_DATABASE}.* TO '${SQL_USER}'@'%' IDENTIFIED BY '${SQL_ROOT_PW}'; \
-#FLUSH PRIVILEGES;"
 
 EXPOSE 3306
 

@@ -44,7 +44,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     expose:
-      - "9000"
+      - 9000
   nginx:
     container_name: nginx
     env_file: .env
@@ -55,9 +55,9 @@ services:
     depends_on:
       - wordpress
     ports:
-      - "443:443"
+      - 443:443
     expose:
-      - "443"
+      - 443
     build:
       context: requirement/nginx
       dockerfile: Dockerfile

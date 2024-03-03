@@ -10,10 +10,6 @@ sed -i "s/username_here/${SQL_USER}/" var/www/html/wordpress/wp-config.php
 sed -i "s/password_here/${SQL_USER_PW}/" var/www/html/wordpress/wp-config.php
 sed -i "s/localhost/mariadb:3306/" var/www/html/wordpress/wp-config.php
 
-sed -i "s/votre_nom_de_bdd/${SQL_DATABASE}/" var/www/html/wordpress/wp-config.php
-sed -i "s/votre_utilisateur_de_bdd/${SQL_USER}/" var/www/html/wordpress/wp-config.php
-sed -i "s/votre_mdp_de_bdd/${SQL_USER_PW}/" var/www/html/wordpress/wp-config.php
-sed -i "s/localhost/mariadb:3306/" var/www/html/wordpress/wp-config.php
 #	wp config create --allow-root --dbname=$SQL_DATABASE --dbuser=$SQL_ROOT --dbpass=$SQL_USER_PW --dbhost=mariadb:3306 --path='/var/www/html/wordpress'
 
 wp core install	--path="/var/www/html/wordpress" --allow-root --url=$DOMAIN_NAME --title=$WP_TITLE --admin_user=$SQL_ROOT --admin_password=$SQL_ROOT_PW --admin_email=$SQL_ROOT_MAIL
